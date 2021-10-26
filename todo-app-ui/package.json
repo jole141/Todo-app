@@ -25,10 +25,12 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
+    "start": "set PORT=4000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker:build": "docker build -t todo-app-ui .",
+    "docker:run": "docker run -p 4000:4000 -d todo-app-ui"
   },
   "eslintConfig": {
     "extends": [
