@@ -18,6 +18,6 @@ services:
 
   todo-app-ui:
     build: ./todo-app-ui
-    container_name: todo-app-api
+    container_name: todo-app-ui
     ports:
       - "4000:4000"
