@@ -1,20 +1,23 @@
-# pull the base image
-FROM node:alpine
+# Use an official Node.js image as the base image
+FROM node:14
 
-# set the working direction
+# Set the working directory
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+# Copy the package.json and yarn.lock files to the container
+COPY package*.json yarn.lock ./
 
-# install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
+# Install the dependencies
+RUN yarn
 
-RUN npm install
+# Copy the remaining files to the container
+COPY . .
 
-# add app
-COPY . ./
+# Build the application in production mode
+RUN yarn build
 
-# start app
-CMD ["npm", "start"]
+ENV HOST=0.0.0.0 PORT=3001
+
+EXPOSE ${PORT}
+# Serve the application with a lightweight web server
+CMD ["yarn", "start"]
